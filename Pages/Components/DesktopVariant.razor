@@ -1,0 +1,26 @@
+﻿<MudContainer Class="flex justify-center align-center" Style="min-height: 100vh;" MaxWidth="MaxWidth.Large">
+    <MudPaper Width="80vw" Elevation="6" Style="padding: 2em;" Class="flex stack justify-between">
+        <MudStack Spacing="7">
+            <MudStack Class="banner" AlignItems="AlignItems.Center">
+                <MudText Typo="Typo.h1">Williams Bros |&nbsp;Devs</MudText>
+                <MudText Style="max-width:800px;">
+                    The Williams brothers are specialists in creating custom software and web applications. With over 20 years of experience, they deliver leading edge solutions and customer satisfaction on every project.
+                </MudText>
+            </MudStack>
+            <MudGrid Justify="Justify.Center">
+                <MudItem Class="pe-3">
+                    <BensCard ScreenSize="ScreenSize" />
+                </MudItem>
+                <MudItem Class="ps-3">
+                    <JohnsCard ScreenSize="ScreenSize" />
+                </MudItem>
+            </MudGrid>
+        </MudStack>
+        <MudText Align="Align.Center" Class="copyright">&copy; 2023 | Benjamin C Williams & John H Williams</MudText>
+    </MudPaper>
+</MudContainer>'
+
+@code {
+    [Parameter, EditorRequired]
+    public required ScreenSize ScreenSize { get; set; }
+}

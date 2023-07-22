@@ -1,0 +1,29 @@
+﻿@page "/"
+<PageTitle>Williams Bros | Devs</PageTitle>
+
+<MudBreakpointProvider>
+    @if (!_loading)
+    {
+        <MudHidden Breakpoint="Breakpoint.MdAndDown">
+            <DesktopVariant ScreenSize="ScreenSize.Computer" />
+        </MudHidden>
+        <MudHidden Breakpoint="Breakpoint.LgAndUp">
+            <MudHidden Breakpoint="Breakpoint.Xs">
+                <MobileVariant ScreenSize="ScreenSize.Tablet" />
+            </MudHidden>
+            <MudHidden Breakpoint="Breakpoint.Xs" Invert="true">
+                <MobileVariant ScreenSize="ScreenSize.Mobile" />
+            </MudHidden>
+        </MudHidden>
+    }
+</MudBreakpointProvider>
+
+@code 
+{
+    private bool _loading = true;
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        _loading = false;
+    }
+}

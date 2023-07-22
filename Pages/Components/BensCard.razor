@@ -1,0 +1,58 @@
+﻿@if (!_loading)
+{
+    <MudCard Class="card" Elevation="2">
+        <MudCardHeader Class="justify-center">
+            <MudStack AlignItems="AlignItems.Center">
+                <MudAvatar Class="initials">BW</MudAvatar>
+                <MudText Typo="_nameTypo">Benjamin C Williams</MudText>
+                <MudText Typo="Typo.subtitle1">Blazor | .NET 7 | EF Core</MudText>
+            </MudStack>
+        </MudCardHeader>
+        <MudCardContent>
+            <MudText>
+                Versatile developer specialising in <MudLink Href="https://dotnet.microsoft.com/en-us/apps/aspnet/web-apps/blazor">.NET Blazor</MudLink> with experience in <MudLink Href="https://flask.palletsprojects.com/en/2.3.x/#">Python w/ Flask</MudLink>, <MudLink Href="https://react.dev/">React w/ Express.js</MudLink>, and <MudLink Href="https://learn.microsoft.com/en-us/aspnet/core/razor-pages/?view=aspnetcore-6.0&tabs=visual-studio">ASP.NET Razor Pages/MVC</MudLink>. Originally from a concert technical management background, Ben understands good client relationships and clear communication are paramount in delivering an exceptional result. He especially enjoys unique and interesting custom projects.
+            </MudText>
+        </MudCardContent>
+        <MudCardActions Class="justify-center">
+            <MudStack  
+        Row
+            Spacing="4">
+                <MudAvatar Variant="Variant.Outlined">
+                    <MudIconButton Color="Color.Primary" Href="https://www.github.com/bcookew" Target="_blank" Icon="fab fa-github" />
+                </MudAvatar>
+                <MudTooltip ShowOnHover="true" Text="Site Coming Soon!">
+                    <MudAvatar Variant="Variant.Outlined">
+                        <MudIconButton   
+                    Disabled
+                        Color="Color.Primary" Href="https://ben.williamsbros.dev" Target="_blank" Icon="@Icons.Material.Outlined.Link" />
+                    </MudAvatar>
+                </MudTooltip>
+                <MudAvatar Variant="Variant.Outlined">
+                    <MudIconButton Color="Color.Primary" Href="https://www.linkedin.com/in/bencw" Target="_blank" Icon="fab fa-linkedin" />
+                </MudAvatar>
+            </MudStack>
+        </MudCardActions>
+    </MudCard>
+}
+
+@code 
+{
+    [Parameter, EditorRequired]
+    public required ScreenSize ScreenSize { get; set; }
+
+    private Typo _nameTypo = Typo.h4;
+    private bool _loading = true;
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        _nameTypo = ScreenSize switch
+        {
+            ScreenSize.Mobile => Typo.h6,
+            ScreenSize.Tablet => Typo.h5,
+            ScreenSize.Computer => Typo.h4,
+            _ => Typo.h4
+        };
+        _loading = false;
+        StateHasChanged();
+    }
+}

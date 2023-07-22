@@ -1,0 +1,53 @@
+﻿@if(!_loading)
+{
+    <MudCard Class="card" Elevation="2">
+        <MudCardHeader Class="justify-center">
+            <MudStack AlignItems="AlignItems.Center">
+                <MudAvatar Class="initials">JW</MudAvatar>
+                <MudText Typo="_nameTypo">John H Williams</MudText>
+                <MudText Typo="Typo.subtitle1">Next.js | Wordpress | Vercel</MudText>
+            </MudStack>
+        </MudCardHeader>
+        <MudCardContent>
+            <MudText>
+                With more than 20 years of experience in graphic arts and web development John is always looking to the future. He is currently leveraging <MudLink Href="https://nextjs.org/">Next.js</MudLink> paired with <MudLink Href="https://wordpress.org/">WordPress</MudLink> as a Headless CMS via <MudLink Href="https://graphql.org/">GraphQL</MudLink> to meet his clients needs. Having worked for PR Firms and Healthcare Networks he is well equipped to handle everything from design requirements to secure API implementations.
+            </MudText>
+        </MudCardContent>
+        <MudCardActions Class="justify-center">
+            <MudStack Row Spacing="4">
+                <MudAvatar Variant="Variant.Outlined">
+                    <MudIconButton Color="Color.Primary" Href="https://github.com/J-h-williams" Target="_blank" Icon="fab fa-github" />
+                </MudAvatar>
+                <MudAvatar Variant="Variant.Outlined">
+                    <MudIconButton Color="Color.Primary" Href="https://john.williamsbros.dev" Target="_blank" Icon="@Icons.Material.Outlined.Link" />
+                </MudAvatar>
+                <MudAvatar Variant="Variant.Outlined">
+                    <MudIconButton Color="Color.Primary" Href="https://www.linkedin.com/in/jhwilliams/" Target="_blank" Icon="fab fa-linkedin" />
+                </MudAvatar>
+            </MudStack>
+        </MudCardActions>
+    </MudCard>
+}
+
+@code
+{
+    [Parameter, EditorRequired]
+    public required ScreenSize ScreenSize { get; set; }
+
+    private Typo _nameTypo = Typo.h4;
+    private bool _loading = true;
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        _nameTypo = ScreenSize switch
+        {
+            ScreenSize.Mobile => Typo.h6,
+            ScreenSize.Tablet => Typo.h5,
+            ScreenSize.Computer => Typo.h4,
+            _ => Typo.h4
+        };
+        _loading = false;
+        StateHasChanged();
+
+    }
+}
