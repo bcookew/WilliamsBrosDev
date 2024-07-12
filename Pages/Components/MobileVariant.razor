@@ -1,41 +1,39 @@
-﻿@if(!_loading)
-{
-    <MudContainer MaxWidth="MaxWidth.Large">
-        <MudStack Spacing="7" AlignItems="AlignItems.Center">
-            <MudStack Class="banner" AlignItems="AlignItems.Center">
-                <MudText Class="pt-10" Typo="_companyTypo">Williams Bros |&nbsp;Devs</MudText>
-                <MudText Style="max-width:600px; text-indent: 1em;" Class="pb-5">
-                    The Williams brothers are specialists in creating custom software and web applications. With over 20 years of experience, they deliver leading edge solutions and customer satisfaction on every project.
-                </MudText>
+﻿<MudContainer MaxWidth="MaxWidth.Large">
+    <MudStack Spacing="7" AlignItems="AlignItems.Center">
+        <MudStack Class="banner" AlignItems="AlignItems.Center">
+            <MudText Class="pt-10 d-none d-md-block d-lg-none" Typo="GetTypo()">Williams Bros |&nbsp;Devs</MudText>
+            <MudStack Spacing="0" AlignItems="AlignItems.Center" Class="pt-10 d-block d-md-none">
+                <MudText Typo="GetTypo()">Williams Bros</MudText>
+                <MudDivider Style="border-top-width:3px; border-top-color: black;" Class="mt-1"/>
+                <MudText Typo="GetTypo()">Devs</MudText>
             </MudStack>
-            <MudGrid Justify="Justify.Center">
-                <MudItem Class="pe-3">
-                    <BensCard ScreenSize="ScreenSize" />
-                </MudItem>
-                <MudItem Class="ps-3">
-                    <JohnsCard ScreenSize="ScreenSize" />
-                </MudItem>
-            </MudGrid>
+            <MudText Style="max-width:600px; text-indent: 1em;" Class="pb-5">
+                The Williams brothers are specialists in creating custom software and web applications. With over 20 years of experience, they deliver leading edge solutions and customer satisfaction on every project.
+            </MudText>
         </MudStack>
-        <MudText Align="Align.Center" Class="copyright pb-5">&copy; 2023 | Benjamin C Williams & John&nbsp;H&nbsp;Williams</MudText>
-    </MudContainer>
-}
+        <MudGrid Justify="Justify.Center">
+            <MudItem Class="pe-3">
+                <BensCard ScreenSize="ScreenSize" />
+            </MudItem>
+            <MudItem Class="ps-3">
+                <JohnsCard ScreenSize="ScreenSize" />
+            </MudItem>
+        </MudGrid>
+    </MudStack>
+    <MudText Align="Align.Center" Class="copyright pb-5">&copy; @DateTime.Now.Year | Benjamin C Williams & John&nbsp;H&nbsp;Williams</MudText>
+</MudContainer>
+
 @code {
     [Parameter, EditorRequired]
     public required ScreenSize ScreenSize { get; set; }
 
-    private Typo _companyTypo;
-    private bool _loading;
-
-    protected override void OnAfterRender(bool firstRender)
+    private Typo GetTypo()
     {
-        _companyTypo = ScreenSize switch
+        return ScreenSize switch
         {
             ScreenSize.Tablet => Typo.h2,
-            ScreenSize.Mobile => Typo.h4,
+            ScreenSize.Mobile => Typo.h3,
             _ => Typo.h4
         };
-        _loading = false;
-        StateHasChanged();
     }
 }
